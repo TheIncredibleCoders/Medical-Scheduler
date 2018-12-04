@@ -1,0 +1,22 @@
+<%@page import="com.dbutils.DBsingletone.DBsingletone"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%
+    int number = Integer.parseInt(request.getParameter("pid"));
+     String email=request.getParameter("email");
+
+    // System.out.println(number);
+    DBsingletone dbs = DBsingletone.getDbSingletone();
+    Connection con = dbs.getConnection();
+    PreparedStatement psmt = con.prepareStatement("delete from pregistration where pid =" + number + " ");
+    int i1 = psmt.executeUpdate();
+    if (i1 != 0) {
+        response.sendRedirect("ViewingPatients.jsp?Success");
+
+    } else {
+        response.sendRedirect("ViewingPatients.jsp?Failed");
+    }
+
+%>
