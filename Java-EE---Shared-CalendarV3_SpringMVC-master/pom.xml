@@ -10,8 +10,18 @@
     <version>1.0.0.SNAPSHOT</version>
     <packaging>war</packaging>
 
+         <profiles>
+    <profile>
+        <id>profile1</id>
+        <properties>
+            <webXmlPath>path/to/custom/webXml</webXmlPath>
+        </properties>
+    </profile>
+</profiles>
+         
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+             <webXmlPath>path/to/default/webXml</webXmlPath>
     </properties>
 
     <dependencies>
@@ -158,6 +168,15 @@
         </resources>
 
         <plugins>
+                 
+                 <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+                <webXml>${webXmlPath}</webXml>
+            </configuration>
+        </plugin>
+                 
             <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-war-plugin</artifactId>
@@ -175,7 +194,7 @@
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-war-plugin</artifactId>
   <configuration>
-    <webXml>src\main\webapp\WEB-INF\web.xml</webXml>        
+    <webXml>webapp\WEB-INF\jsp\web.xml</webXml>        
   </configuration>
 </plugin>
             <plugin>
